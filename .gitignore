@@ -1,0 +1,16 @@
+# Excel lock files
+~$*.xlsx
+~$*.xls
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.python-version
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
