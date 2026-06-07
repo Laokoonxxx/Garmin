@@ -123,6 +123,82 @@ HTML_TEMPLATE = r"""<!doctype html>
     font-size: 12px; font-family: monospace; white-space: nowrap;
     box-shadow: 0 4px 10px rgba(0,0,0,.2);
   }
+
+  /* ----- Print layout: A4 landscape, one year per page, only year + grid ----- */
+  @media print {
+    @page {
+      size: A4 landscape;
+      margin: 10mm 8mm 8mm 8mm;
+    }
+    html, body { background: #fff !important; margin: 0; padding: 0; color: #000; }
+    /* Hide everything not part of the heatmap output */
+    header,
+    .settings,
+    #overview,
+    #tip,
+    .tier-summary,
+    .actions,
+    button,
+    .add-btn {
+      display: none !important;
+    }
+    main { padding: 0; max-width: none; margin: 0; }
+    /* Each year on its own page */
+    .year-block {
+      page-break-before: always;
+      break-before: page;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      background: #fff !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    .year-block:first-of-type {
+      page-break-before: avoid;
+      break-before: auto;
+    }
+    .year-head {
+      margin: 0 0 4mm 0;
+      padding: 0 0 2mm 0;
+      border-bottom: 1px solid #000;
+      display: block;
+    }
+    .year-head h3 {
+      font-size: 22pt; font-weight: 700; margin: 0;
+    }
+    .year-head .stats {
+      font-size: 10pt; color: #444; margin-top: 1mm;
+    }
+    /* Grid: force colored cells to print, drop visual UI artefacts */
+    .grid {
+      gap: 0.5pt;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      width: 100%;
+    }
+    .cell {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+      font-size: 4pt;
+      min-width: 0;
+      text-shadow: none !important;
+    }
+    .cell:not(.colored) {
+      background: #fff !important;
+      color: #999 !important;
+    }
+    /* End-of-run marker as real border so it prints reliably */
+    .cell.end-r { box-shadow: none !important; border-right: 1.4pt solid #000 !important; }
+    .cell.end-b { box-shadow: none !important; border-bottom: 1.4pt solid #000 !important; }
+    .cell.end-r.end-b {
+      border-right: 1.4pt solid #000 !important;
+      border-bottom: 1.4pt solid #000 !important;
+    }
+  }
 </style>
 </head>
 <body>
