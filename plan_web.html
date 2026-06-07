@@ -76,12 +76,29 @@
     .settings,
     #overview,
     #tip,
-    .tier-summary,
     .actions,
     button,
     .add-btn {
       display: none !important;
     }
+    /* Per-year tier summary kept for print, styled compactly */
+    .tier-summary {
+      margin-top: 4mm !important;
+      gap: 2mm 6mm !important;
+      font-size: 9pt !important;
+      color: #000 !important;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .tier-summary .swatch {
+      width: 10pt !important;
+      height: 10pt !important;
+      border: 0.5pt solid #000 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    .tier-summary span { white-space: nowrap; }
     main { padding: 0; max-width: none; margin: 0; }
     /* Each year on its own page */
     .year-block {
